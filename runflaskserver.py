@@ -113,7 +113,8 @@ class Article(Resource):
 
 class latest_art(Resource):
     def get(self):
-        my_dict = {'id': 454,'date': '27102020','title': 'baldurs-gate-3-update-reveals-the-most-romanced-npc/\n','link': 'https://www.pcgamer.com/baldurs-gate-3-update-reveals-the-most-romanced-npc/\n','main_art': 0,}
+		my_dict = {'id': 454,'date': '27102020','title': 'baldurs-gate-3-update-reveals-the-most-romanced-npc/\n','link': 'https://www.pcgamer.com/baldurs-gate-3-update-reveals-the-most-romanced-npc/\n','main_art': 0}
+	
 		return my_dict
 
 
