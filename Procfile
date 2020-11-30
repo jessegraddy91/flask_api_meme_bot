@@ -1,1 +1,1 @@
-web: gunicorn discord-meme-bot-api:app
+web: gunicorn runflaskserver:app
