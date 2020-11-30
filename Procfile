@@ -1,1 +1,1 @@
-worker: python runflaskserver.py
+web: python runflaskserver.py
