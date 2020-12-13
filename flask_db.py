@@ -9,7 +9,7 @@ DATABASE_URL = os.environ['DATABASE_URL']
 def get_url(article_id):
     with psycopg2.connect(DATABASE_URL) as con:
         cur = con.cursor()
-        cursor = cur.execute("SELECT url FROM urls WHERE id = ?", (article_id,))
+        cursor = cur.execute("SELECT url FROM urls WHERE id = %s", [article_id,])
         url_val = cursor.fetchone()[0]
         return url_val
    
@@ -17,7 +17,7 @@ def insert_url(url):
     unix_time=int(time.time())
     with psycopg2.connect(DATABASE_URL) as con:
         cur = con.cursor()
-        cur.execute("INSERT INTO urls (id,url) VALUES (?,?)", (unix_time,url))
+        cur.execute("INSERT INTO urls (id,url) VALUES (%s,%s)", [unix_time,url])
         con.commit()
 
 """
