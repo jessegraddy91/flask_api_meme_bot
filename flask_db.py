@@ -19,6 +19,15 @@ def insert_url(url):
         cur = con.cursor()
         cur.execute("INSERT INTO urls (id,url) VALUES (%s,%s)", [unix_time,url])
         con.commit()
+        
+def get_all_data():
+    with psycopg2.connect(DATABASE_URL) as con:
+        cur = con.cursor()
+        cursor = cur.execute("SELECT * FROM urls")
+        print('cursor: ' + cursor)
+        url_val = cursor.fetchall()
+        print('url_val: ' + url_val)
+        return url_val
 
 """
 def latest_article():
@@ -41,6 +50,11 @@ def get_article_by_id(id):
     if request.method == 'GET':        
         return str(get_url(id))
 
+@app.route("/api/article/all", methods=['GET'])
+def get_article_by_id(id):
+    if request.method == 'GET':        
+        return str(get_all_data())
+       
 """
 @app.route("/api/article/latest-article", methods=['GET'])
 def get_article_by_id():
