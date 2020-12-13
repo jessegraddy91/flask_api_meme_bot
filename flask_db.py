@@ -9,24 +9,24 @@ DATABASE_URL = os.environ['DATABASE_URL']
 def get_url(article_id):
     with psycopg2.connect(DATABASE_URL) as con:
         cur = con.cursor()
-        cursor = cur.execute("SELECT url FROM urls WHERE id = %s", [article_id,])
-        url_val = cursor.fetchone()[0]
+        cursor = cur.execute("SELECT url FROM urls WHERE id = %s;", [article_id,])
+        url_val = cur.fetchone()[0]
         return url_val
    
 def insert_url(url):
     unix_time=int(time.time())
     with psycopg2.connect(DATABASE_URL) as con:
         cur = con.cursor()
-        cur.execute("INSERT INTO urls (id,url) VALUES (%s,%s)", [unix_time,url])
+        cur.execute("INSERT INTO urls (id,url) VALUES (%s,%s);", (unix_time,url))
         con.commit()
         
 def get_all_data():
     with psycopg2.connect(DATABASE_URL) as con:
         cur = con.cursor()
-        cursor = cur.execute("SELECT * FROM urls")
-        print('cursor: ' + cursor)
-        url_val = cursor.fetchall()
-        print('url_val: ' + url_val)
+        cursor = cur.execute("SELECT * FROM urls;")
+        print('cursor: ' + str(cursor))
+        url_val = cur.fetchone()
+        print('url_val: ' + str(url_val))
         return url_val
 
 """
