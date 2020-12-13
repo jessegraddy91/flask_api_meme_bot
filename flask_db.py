@@ -7,7 +7,7 @@ app = Flask(__name__)
 DATABASE_URL = os.environ['DATABASE_URL']
 
 def get_url(article_id):
-    with sql.connect(DATABASE_URL) as con:
+    with psycopg2.connect(DATABASE_URL) as con:
         cur = con.cursor()
         cursor = cur.execute("SELECT url FROM urls WHERE id = ?", (article_id,))
         url_val = cursor.fetchone()[0]
@@ -15,7 +15,7 @@ def get_url(article_id):
    
 def insert_url(url):
     unix_time=int(time.time())
-    with sql.connect(DATABASE_URL) as con:
+    with psycopg2.connect(DATABASE_URL) as con:
         cur = con.cursor()
         cur.execute("INSERT INTO urls (id,url) VALUES (?,?)", (unix_time,url))
         con.commit()
@@ -23,7 +23,7 @@ def insert_url(url):
 """
 def latest_article():
     unix_time=int(time.time())
-    with sql.connect(DATABASE_URL) as con:
+    with psycopg2.connect(DATABASE_URL) as con:
         cur = con.cursor()
         cur.execute("INSERT INTO urls (id,url) VALUES (?,?)", (unix_time,url))
         con.commit()
