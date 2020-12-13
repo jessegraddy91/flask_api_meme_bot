@@ -51,7 +51,7 @@ def get_article_by_id(id):
         return str(get_url(id))
 
 @app.route("/api/article/all", methods=['GET'])
-def get_article_by_id(id):
+def get_all_articles():
     if request.method == 'GET':        
         return str(get_all_data())
        
