@@ -24,9 +24,7 @@ def get_all_data():
     with psycopg2.connect(DATABASE_URL) as con:
         cur = con.cursor()
         cursor = cur.execute("SELECT * FROM urls;")
-        print('cursor: ' + str(cursor))
-        url_val = cur.fetchone()
-        print('url_val: ' + str(url_val))
+        url_val = cur.fetchall()
         return url_val
 
 """
