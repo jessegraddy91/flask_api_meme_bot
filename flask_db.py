@@ -25,6 +25,7 @@ def get_all_data():
         cur = con.cursor()
         cursor = cur.execute("SELECT * FROM urls;")
         url_val = cur.fetchall()
+        print(f"url_val: {url_val}")
         return url_val
 
 """
@@ -41,7 +42,7 @@ def post_new_url():
     if request.method == 'POST':
         url = request.form['url']       
         insert_url(url)
-        return "Done"
+        return f"Done with post request from: {url}"
 
 @app.route("/api/article/<int:id>", methods=['GET'])
 def get_article_by_id(id):
@@ -66,6 +67,6 @@ def home():
         return render_template('index.html')
 
 
-
 if __name__ == "__main__":
     app.run(debug=True)
+    
