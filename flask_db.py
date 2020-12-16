@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 import json, time, os
 import psycopg2
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static")
 
 DATABASE_URL = os.environ['DATABASE_URL']
 
@@ -25,7 +25,6 @@ def get_all_data():
         cur = con.cursor()
         cursor = cur.execute("SELECT * FROM urls;")
         url_val = cur.fetchall()
-        print(f"url_val: {url_val}")
         return url_val
 
 """
@@ -52,7 +51,8 @@ def get_article_by_id(id):
 @app.route("/api/article/all", methods=['GET'])
 def get_all_articles():
     if request.method == 'GET':        
-        return str(get_all_data())
+        db_data = get_all_data()
+        return render_template('all_items.html', db_data=db_data)
        
 """
 @app.route("/api/article/latest-article", methods=['GET'])
