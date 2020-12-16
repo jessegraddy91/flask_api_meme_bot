@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>All Items from DB</title>
+        {% block css %}
+            <link href="{{url_for('static', filename='css/all_page.css')}}" rel="stylesheet">
+        {% endblock %}
+    </head>
+    <body>
+        <h1>DB Items List</h1>
+        <ul>
+            {% for db_row in db_data %}
+                <li>id: {{db_row[0]}}</li>
+                <li>----- url: {{db_row[1]}}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
